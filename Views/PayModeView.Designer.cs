@@ -274,8 +274,11 @@
             // 
             TxtPayModeId.Location = new Point(45, 38);
             TxtPayModeId.Name = "TxtPayModeId";
+            TxtPayModeId.ReadOnly = true;
             TxtPayModeId.Size = new Size(207, 27);
             TxtPayModeId.TabIndex = 1;
+            TxtPayModeId.Text = "0";
+            TxtPayModeId.TextAlign = HorizontalAlignment.Right;
             // 
             // label3
             // 
