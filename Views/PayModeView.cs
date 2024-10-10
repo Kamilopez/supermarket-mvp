@@ -24,6 +24,19 @@ namespace Supermarket_mvp.Views
             tabControl1.TabPages.Remove(tabPagePayModeDetail);
         }
 
+        private void AssociateAndRaiseViewEvents()
+        {
+            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
+
+            TxtSearch.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                }
+            };
+        }
+
         public string PayModeId
         {
             get { return TxtPayModeId.Text; }
@@ -62,8 +75,6 @@ namespace Supermarket_mvp.Views
             set { message = value; }
         }
 
-        bool IPayModeView.Message { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
         public event EventHandler EditEvent;
@@ -76,20 +87,23 @@ namespace Supermarket_mvp.Views
             DgPayMode.DataSource = payModeList;
         }
 
-        private void AssociateAndRaiseViewEvents()
+        private static PayModeView instance;
+
+        public static PayModeView GetInstance()
         {
-            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
-
-            TxtSearch.KeyDown += (s, e) =>
+            if (instance == null || instance.IsDisposed)
             {
-                if (e.KeyCode == Keys.Enter)
+                instance = new PayModeView();
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
                 {
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                    instance.WindowState = FormWindowState.Normal;
                 }
-            };
+                instance.BringToFront();
+            }
+            return instance;
         }
-        
-
-
     }
 }
