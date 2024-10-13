@@ -26,7 +26,7 @@ namespace Supermarket_mvp.Models
 
         [DisplayName("Price")]
         [Required(ErrorMessage = "Price is required")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be a positive number greater than zero")]
+        [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive number greater than zero")]
         public decimal Price { get; set; }
 
         [DisplayName("Category Id")]

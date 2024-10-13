@@ -57,7 +57,7 @@ namespace Supermarket_mvp._Repositories
                                         WHERE Pay_Mode_Id = @id";
                 command.Parameters.Add("@name", SqlDbType.NVarChar).Value = payModeModel.Name;
                 command.Parameters.Add("@observation", SqlDbType.NVarChar).Value = payModeModel.Observation;
-                command.Parameters.Add("@is", SqlDbType.Int).Value = payModeModel.Id;
+                command.Parameters.Add("@id", SqlDbType.Int).Value = payModeModel.Id;
                 command.ExecuteNonQuery();
             }
         }
