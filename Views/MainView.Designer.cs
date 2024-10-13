@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             panel1 = new Panel();
-            button2 = new Button();
+            BtnCategories = new Button();
             BtnProduct = new Button();
             BtnExit = new Button();
             BtnPayMode = new Button();
@@ -41,7 +41,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(BtnCategories);
             panel1.Controls.Add(BtnProduct);
             panel1.Controls.Add(BtnExit);
             panel1.Controls.Add(BtnPayMode);
@@ -52,14 +52,15 @@
             panel1.Size = new Size(191, 563);
             panel1.TabIndex = 0;
             // 
-            // button2
+            // BtnCategories
             // 
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.Location = new Point(0, 332);
-            button2.Name = "button2";
-            button2.Size = new Size(191, 113);
-            button2.TabIndex = 4;
-            button2.UseVisualStyleBackColor = true;
+            BtnCategories.BackgroundImage = Properties.Resources.categorias;
+            BtnCategories.BackgroundImageLayout = ImageLayout.Zoom;
+            BtnCategories.Location = new Point(0, 332);
+            BtnCategories.Name = "BtnCategories";
+            BtnCategories.Size = new Size(191, 113);
+            BtnCategories.TabIndex = 4;
+            BtnCategories.UseVisualStyleBackColor = true;
             // 
             // BtnProduct
             // 
@@ -123,7 +124,7 @@
         private Button BtnPayMode;
         private PictureBox pictureBox1;
         private Button BtnExit;
-        private Button button2;
+        private Button BtnCategories;
         private Button BtnProduct;
     }
 }

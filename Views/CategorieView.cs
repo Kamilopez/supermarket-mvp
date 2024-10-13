@@ -10,23 +10,24 @@ using System.Windows.Forms;
 
 namespace Supermarket_mvp.Views
 {
-    public partial class ProductView : Form, IProductView
+    public partial class CategorieView : Form, ICategorieView
     {
         private bool isEdit;
         private bool isSuccessful;
         private string message;
-        public ProductView()
+
+        public CategorieView()
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
 
-            tabControl1.TabPages.Remove(tabPageProductDetail);
-            BtnCloseP.Click += delegate { this.Close(); };
+            tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+            BtnClose.Click += delegate { this.Close(); };
         }
 
         private void AssociateAndRaiseViewEvents()
         {
-            BtnSearchP.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
+            BtnSearch.Click += delegate { SearchEvent?.Invoke(this, EventArgs.Empty); };
 
             TxtSearch.KeyDown += (s, e) =>
             {
@@ -36,26 +37,26 @@ namespace Supermarket_mvp.Views
                 }
             };
 
-            BtnNewP.Click += delegate
+            BtnNew.Click += delegate
             {
                 AddNewEvent?.Invoke(this, EventArgs.Empty);
 
-                tabControl1.TabPages.Remove(tabPageProductList);
-                tabControl1.TabPages.Add(tabPageProductDetail);
-                tabPageProductDetail.Text = "Add New Product";
+                tabControl1.TabPages.Remove(tabPageCategoriesList);
+                tabControl1.TabPages.Add(tabPageCategoriesDetail);
+                tabPageCategoriesDetail.Text = "Add New Categorie";
             };
 
-            BtnEditP.Click += delegate
+            BtnEdit.Click += delegate
             {
                 EditEvent?.Invoke(this, EventArgs.Empty);
 
-                tabControl1.TabPages.Remove(tabPageProductList);
-                tabControl1.TabPages.Add(tabPageProductDetail);
-                tabPageProductDetail.Text = "Edit Product";
+                tabControl1.TabPages.Remove(tabPageCategoriesList);
+                tabControl1.TabPages.Add(tabPageCategoriesDetail);
+                tabPageCategoriesDetail.Text = "Edit Categorie";
             };
 
-            BtnDeleteP.Click += delegate {
-                var result = MessageBox.Show("Are you sure you want to deleted the selected Product",
+            BtnDelete.Click += delegate {
+                var result = MessageBox.Show("Are you sure you want to deleted the selected Categorie",
                     "Warning",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -70,43 +71,36 @@ namespace Supermarket_mvp.Views
             {
                 SaveEvent?.Invoke(this, EventArgs.Empty);
 
-                tabControl1.TabPages.Remove(tabPageProductDetail);
-                tabControl1.TabPages.Add(tabPageProductList);
+                tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+                tabControl1.TabPages.Add(tabPageCategoriesList);
                 MessageBox.Show(Message);
             };
             BtnCancel.Click += delegate
             {
                 CancelEvent?.Invoke(this, EventArgs.Empty);
 
-                tabControl1.TabPages.Remove(tabPageProductDetail);
-                tabControl1.TabPages.Add(tabPageProductList);
+                tabControl1.TabPages.Remove(tabPageCategoriesDetail);
+                tabControl1.TabPages.Add(tabPageCategoriesList);
             };
+
         }
 
-        public string ProductId
+        public string CategorieId
         {
-            get { return TxtProductId.Text; }
-            set { TxtProductId.Text = value; }
+            get { return TxtCategorieId.Text; }
+            set { TxtCategorieId.Text = value; }
         }
-        public string ProductName
+
+        public string CategorieName
         {
-            get { return TxtProductName.Text; }
-            set { TxtProductName.Text = value; }
+            get { return TxtCategorieName.Text; }
+            set { TxtCategorieName.Text = value; }
         }
-        public string ProductStock
+
+        public string Categoriedescription
         {
-            get { return TxtProductStock.Text; }
-            set { TxtProductStock.Text = value; }
-        }
-        public string ProductPrice
-        {
-            get { return TxtProductPrice.Text; }
-            set { TxtProductPrice.Text = value; }
-        }
-        public string ProductCategory
-        {
-            get { return TxtProductCategory.Text; }
-            set { TxtProductCategory.Text = value; }
+            get { return TxtCategorieDescription.Text; }
+            set { TxtCategorieDescription.Text = value; }
         }
         public string SearchValue
         {
@@ -128,6 +122,7 @@ namespace Supermarket_mvp.Views
             get { return message; }
             set { message = value; }
         }
+
         public event EventHandler SearchEvent;
         public event EventHandler AddNewEvent;
         public event EventHandler EditEvent;
@@ -135,18 +130,18 @@ namespace Supermarket_mvp.Views
         public event EventHandler SaveEvent;
         public event EventHandler CancelEvent;
 
-        public void SetProductListBildingSource(BindingSource productList)
+        public void SetCategorieListBildingSource(BindingSource categorieList)
         {
-            DgProduct.DataSource = productList;
+            DgCategories.DataSource = categorieList;
         }
 
-        private static ProductView instance;
+        private static CategorieView instance;
 
-        public static ProductView GetInstance(Form parentContainer)
+        public static CategorieView GetInstance(Form parentContainer)
         {
             if (instance == null || instance.IsDisposed)
             {
-                instance = new ProductView();
+                instance = new CategorieView();
                 instance.MdiParent = parentContainer;
 
                 instance.FormBorderStyle = FormBorderStyle.None;
